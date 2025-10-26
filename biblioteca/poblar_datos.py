@@ -2,7 +2,7 @@ from biblioteca.models import Autor, Libro, Resena
 
 #Crear autores
 autor1 = Autor.objects.create(nombre = "Gabriel García Márquez", nacionalidad = "Colombiana")
-autor2 = Autor.objects.create(nombre = "", nacionalidad = "")
+autor2 = Autor.objects.create(nombre = "Isabel Allende", nacionalidad = "Chilena")
 autor3 = Autor.objects.create(nombre="Jorge Luis Borges", nacionalidad="Argentina")
 
 #Crear libros

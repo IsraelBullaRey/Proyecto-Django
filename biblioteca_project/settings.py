@@ -102,6 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
+    # Agregamos paginación, es decir, organizar en paginas los objetos
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # Se definen 5 objetos como maximo en cada pagina /?page=n con n el numero de pagina
+    'PAGE_SIZE': 5,
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),

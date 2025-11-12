@@ -1,23 +1,30 @@
 from rest_framework import serializers
+from  .models import *
+
+class AutorSerializer(serializers.ModelSerializer):
+    # Esto es para que tome los atributos de la clase del modelo por defecto:
+    class Meta:
+        model = Autor
+        fields = '__all__'
 
 class LibroSerializer(serializers.ModelSerializer):
     recent_reviews = serializers.SerializerMethodField()
     author_name = serializers.ReadOnlyField(source='autor.nombre')
-    titulo = serializers.ReadOnlyField(source='libro.titulo')
-    fecha_publicacion = serializers.ReadOnlyField(source='libro.fecha_publicacion')
-    resumen = serializers.ReadOnlyField(source='libro.resumen')
 
+    # Calculamos el atributo, pasamos el obj que es lo que se serializa
     def get_recent_reviews(self, obj):
-        reviews = obj.review_set.order_by('-date')[:5]
+        # Ordena las reseñas del objeto de forma descendente mostrando los 5 primeros
+        reviews = obj.review_set.order_by('-fecha')[:5]
+        # Retornar las reseñas del libro como coleccion de objetos y lo convertirmos a formato serializer .data
         return ResenaSerializer(reviews, many=True).data
-
-class AutorSerializer(serializers.ModelSerializer):
-    author_name = serializers.ReadOnlyField(source='autor.nombre')
-    nacionality = serializers.ReadOnlyField(source='autor.nacionalidad')
+    
+    # Esto es para que tome los atributos de la clase del modelo por defecto:
+    class Meta:
+        model = Libro
+        fields = '__all__'
 
 class ResenaSerializer(serializers.ModelSerializer):
-    libro = serializers.ReadOnlyField(source='resenia.libro')
-    texto = serializers.ReadOnlyField(source='resenia.texto')
-    calificacion = serializers.ReadOnlyField(source='resenia.calificacion')
-    fecha = serializers.ReadOnlyField(source='resenia.fecha')
-    rating = serializers.ReadOnlyField(source='resenia.rating')
+    # Esto es para que tome los atributos de la clase del modelo por defecto:
+    class Meta:
+        model = Resena
+        fields = '__all__'

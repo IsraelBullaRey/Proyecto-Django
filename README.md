@@ -17,15 +17,6 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ## Instalación y ejecución
 
-### 🌟 Clonar el repositorio
-
-```bash
-git clone https://github.com/IsraelBullaRey/Proyecto-Django.git
-cd Proyecto-Django
-```
-
----
-
 ### 🌟 Crear y activar el entorno virtual
 
 #### En Windows (CMD)
@@ -40,6 +31,14 @@ venv\Scripts\activate.bat
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+```
+---
+
+### 🌟 Clonar el repositorio dentro del entorno virtual venv (cd)
+
+```bash
+git clone https://github.com/IsraelBullaRey/Proyecto-Django.git
+cd Proyecto-Django
 ```
 
 ---
@@ -64,13 +63,47 @@ Linux o Mac
 python -m pip install Django
 ```
 
+#### Aparte, instalar si no se encuentra Django Rest Framework
+```bash
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+```
+
+---
+
 ### 🌟 Aplicar migraciones
 
 Ejecuta las migraciones de Django para preparar la base de datos:
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
+
+---
+
+### 🌟 Crear un superusuario
+
+Para acceder al panel de administración:
+
+```bash
+python manage.py createsuperuser
+```
+
+Sigue las instrucciones (nombre, correo y contraseña).
+
+---
+
+### 🌟 Ejecutar el servidor de desarrollo
+
+```bash
+python manage.py runserver
+```
+
+Luego abre tu navegador en:
+
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
 ---
 
@@ -100,30 +133,6 @@ exec(open('biblioteca/poblar_datos.py', encoding='utf-8').read())
 ```bash
 python manage.py shell < biblioteca/poblar_datos.py
 ```
----
-
-### 🌟 Crear un superusuario
-
-Para acceder al panel de administración:
-
-```bash
-python manage.py createsuperuser
-```
-
-Sigue las instrucciones (nombre, correo y contraseña).
-
----
-
-### 🌟 Ejecutar el servidor de desarrollo
-
-```bash
-python manage.py runserver
-```
-
-Luego abre tu navegador en:
-
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-
 ---
 
 ## ✅ Validaciones incluidas

@@ -14,7 +14,7 @@ class AutorViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     # Campos de filtrado
     #filterset_fields = ['nombre', 'nacionalidad']
-    # Campos para ordenar
+    # Campos para ordenar /?ordering=nombre y /?ordering=nacionalidad
     ordering_fields = ['nombre', 'nacionalidad']
 
     # Si se envia el nombre devuelve solo valores con dicho nombre
@@ -42,7 +42,7 @@ class LibroViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     # Campos para filtrar
     filterset_fields = ['autor', 'fecha_publicacion']
-    # Campos para ordenar
+    # Campos para ordenar /?ordering=titulo y /?ordering=fecha_publicacion
     ordering_fields = ['titulo', 'fecha_publicacion']
 
     # Sobreescribir para ordenar por fecha de publicación los 10 primeros libros /?reciente=true
@@ -51,7 +51,9 @@ class LibroViewSet(viewsets.ModelViewSet):
             return Libro.objects.order_by('-fecha_publicacion')[:10]
         return Libro.objects.all()
 
-    #Obtener el promedio de calificación (rating) de un libro en específico.
+    # Definimos un endpoint @action personalizado con el nombre rating_aprox.
+    # detail=True es que se debe especificar la llave primaria del objeto Libro
+    # Obtener el promedio de calificación (rating) de un libro en específico /'idlibro'/rating_aprox.
     @action(detail=True, methods=['get'])
     def rating_aprox(self, request, pk=None):
         libro = self.get_object()
@@ -63,9 +65,9 @@ class ResenaViewSet(viewsets.ModelViewSet):
     serializer_class = ResenaSerializer
     # Mecanismos de ordenamiento/filtrado
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    # Campos de filtrado
+    # Campos de filtrado /?calificacion=4 o /?rating=4.8
     filterset_fields = ['calificacion', 'rating']
-    # Campos para ordenar
+    # Campos para ordenar /?ordering=calificacion y /?ordering=rating
     ordering_fields = ['calificacion', 'rating']
 
     #Sobreescrito el método, ordenando por fecha cuando /?reciente=true
@@ -73,7 +75,6 @@ class ResenaViewSet(viewsets.ModelViewSet):
         if self.request.query_params.get('reciente'):
             return Resena.objects.order_by('-fecha')
         return Resena.objects.all()
-
 
     #Sobreecrito el método cuando guarda la fecha de resena para mostrar mensaje informativo
     def perform_create(self, serializer):

@@ -1,5 +1,6 @@
 from biblioteca.models import Autor, Libro, Resena
 
+# Por facilidad, realizado con la IA ChatGPT
 # Crear autores
 autor1 = Autor.objects.create(nombre="Gabriel García Márquez", nacionalidad="Colombiana")
 autor2 = Autor.objects.create(nombre="Isabel Allende", nacionalidad="Chilena")

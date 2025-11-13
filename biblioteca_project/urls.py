@@ -22,7 +22,7 @@ from django.urls import path, include
 router = DefaultRouter()
 router.register('libros', LibroViewSet)
 router.register('autores', AutorViewSet)
-router.register('resenias', ResenaViewSet)
+router.register('resenas', ResenaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
